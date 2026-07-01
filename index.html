@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generator Stopki</title>
+    <style>
+        body { margin: 0; font-family: Arial, sans-serif; background: #f8f9fa; }
+        #loginScreen {
+            position: fixed;
+            inset: 0;
+            background: #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+        #loginBox {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 10px;
+            box-shadow: 0 6px 25px rgba(0,0,0,0.18);
+            text-align: center;
+            width: 360px;
+            max-width: 90%;
+        }
+        h2 { margin: 0 0 20px; color: #22346c; }
+        input[type="password"], input[type="text"], input[type="email"] {
+            padding: 12px;
+            width: 240px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            margin-top: 15px;
+            padding: 12px 40px;
+            background: #22346c;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover { background: #1a2855; }
+        .error { color: #c00; margin-top: 12px; font-size: 14px; }
+        #mainContent { display: none; padding: 30px; max-width: 900px; margin: 0 auto; }
+        .hint { color: #6e6e6e; font-size: 12px; margin: -8px 0 12px; }
+    </style>
+</head>
+<body>
+
+<div id="loginScreen">
+    <div id="loginBox">
+        <h2>Generator stopki e-mail</h2>
+        <p>Podaj hasło:</p>
+        <input type="password" id="passInput" autofocus>
+        <br>
+        <button onclick="checkPassword()">Wejdź</button>
+        <div id="errorMsg" class="error"></div>
+    </div>
+</div>
+
+<div id="mainContent">
+
+<h2>Formularz do wprowadzenia danych stopki</h2>
+<form id="signatureForm">
+    <label for="titleName">Tytuł/stopień naukowy + Imię i nazwisko (PL):</label><br>
+    <input type="text" id="titleName" name="titleName" placeholder="np. prof. dr hab. inż. Marcin Witczak" style="width: 400px;"><br><br>
+	
+    
+    <label for="nameEn">Tytuł + Imię i nazwisko + stopnie (EN):</label><br>
+    <input type="text" id="nameEn" name="nameEn" placeholder="np. prof. Marcin Witczak, Ph.D., D.Sc., B.Eng" style="width: 400px;"><br><br>
+	
+    
+    <label for="positionPl">Stanowisko (PL):</label><br>
+    <input type="text" id="positionPl" name="positionPl" placeholder="np. Prorektor ds. Nauki i Internacjonalizacji" style="width: 400px;"><br><br>
+	
+
+    <label for="positionEn">Stanowisko (EN):</label><br>
+    <input type="text" id="positionEn" name="positionEn" placeholder="np. Vice Rector for Science and Internationalization" style="width: 400px;"><br><br>
+
+
+    <label for="phoneMobile">Telefon komórkowy:</label><br>
+    <input type="text" id="phoneMobile" name="phoneMobile" placeholder="np. +48 123 456 789"><br><br>
+    
+	
+    <label for="phoneLandline">Telefon stacjonarny:</label><br>
+    <input type="text" id="phoneLandline" name="phoneLandline" placeholder="np. +48 76 835 11 11"><br><br>
+    
+	
+    <label for="email">Adres e-mail:</label><br>
+    <input type="email" id="email" name="email"><br><br>
+
+
+    <button type="button" onclick="generateSignature()" style="padding: 10px 20px; font-size: 16px; color: #ffffff; background-color: #22346c; border: none; border-radius: 5px; cursor: pointer;">Generuj Stopkę</button>
+</form>
+
+<h2>Wygenerowana stopka:</h2>
+<div id="signatureOutput" style="padding: 10px; margin-top: 10px; border: 1px solid #ccc; border-radius: 5px; background:white;"></div>
+
+<div style="margin-top: 15px;">
+    <button onclick="copySignature()" style="padding: 10px 20px; font-size: 16px; color: #ffffff; background-color: #22346c; border: none; border-radius: 5px; cursor: pointer;">
+        Skopiuj Stopkę
+    </button>
+
+    <button onclick="copySignatureAsHTML()" style="padding: 10px 20px; font-size: 16px; color: #ffffff; background-color: #2e7d32; border: none; border-radius: 5px; cursor: pointer; margin-left: 10px;">
+        Skopiuj jako HTML
+    </button>
+</div>
+
+<a href="https://support.microsoft.com/pl-pl/office/twórca-i-dodawanie-podpisu-e-mail-w-programie-outlook-8ee5d4f4-68fd-464a-a1c1-0e1c80bb27f2#PickTab=Classic_Outlook" target="_blank" style="text-decoration: none;">
+    <button style="margin: 10px 10px 0 0; padding: 10px 20px; font-size: 16px; color: #ffffff; background-color: #22346c; border: none; border-radius: 5px; cursor: pointer;">
+        Instrukcja Outlook
+    </button>
+</a>
+<a href="https://support.google.com/mail/answer/8395?hl=PL&ref_topic=3394219" target="_blank" style="text-decoration: none;">
+    <button style="margin: 10px 10px 0 0; padding: 10px 20px; font-size: 16px; color: #ffffff; background-color: #22346c; border: none; border-radius: 5px; cursor: pointer;">
+        Instrukcja Gmail
+    </button>
+</a>
+<a href="mailto:r.lukowczyk@pans.glogow.pl?subject=Problem%20z%20stopką" style="text-decoration: none;">
+    <button style="margin-top: 10px; padding: 10px 20px; font-size: 16px; color: #ffffff; background-color: #22346c; border: none; border-radius: 5px; cursor: pointer;">
+        Zgłoś problem
+    </button>
+</a>
+
+<script>
+let currentSignatureHTML = '';
+
+const CORRECT_HASH = "d9e88b056284a23fe56973bf02b832edc2d96c828c1ea3e5793b4132524a02aa";
+
+async function checkPassword() {
+    const input = document.getElementById("passInput").value;
+    const error = document.getElementById("errorMsg");
+
+    const encoder = new TextEncoder();
+    const data = encoder.encode(input);
+    const hashBuffer = await crypto.subtle.digest("SHA-256", data);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+
+    if (hashHex === CORRECT_HASH) {
+        document.getElementById("loginScreen").style.display = "none";
+        document.getElementById("mainContent").style.display = "block";
+    } else {
+        error.textContent = "Nieprawidłowe hasło";
+    }
+}
+
+document.getElementById("passInput").addEventListener("keypress", e => {
+    if (e.key === "Enter") checkPassword();
+});
+
+function generateSignature() {
+    const titleName = document.getElementById("titleName").value.trim();
+    const nameEn = document.getElementById("nameEn").value.trim();
+    const positionPl = document.getElementById("positionPl").value.trim();
+    const positionEn = document.getElementById("positionEn").value.trim();
+    const phoneMobile = document.getElementById("phoneMobile").value.trim();
+    const phoneLandline = document.getElementById("phoneLandline").value.trim();
+    const email = document.getElementById("email").value.trim();
+
+    const mobileRow = phoneMobile ? `
+        <tr>
+          <td style="padding: 2px 0; padding-right: 10px; text-align: left; vertical-align: top; white-space: nowrap; color: #6e6e6e;">m:</td>
+          <td style="padding: 2px 0; text-align: left;">${phoneMobile}</td>
+        </tr>` : '';
+
+    const landlineRow = phoneLandline ? `
+        <tr>
+          <td style="padding: 2px 0; padding-right: 10px; text-align: left; vertical-align: top; white-space: nowrap; color: #6e6e6e;">t:</td>
+          <td style="padding: 2px 0; text-align: left;">${phoneLandline}</td>
+        </tr>` : '';
+
+    const emailRow = email ? `
+        <tr>
+          <td style="padding: 2px 0; padding-right: 10px; text-align: left; vertical-align: top; white-space: nowrap; color: #6e6e6e;">e:</td>
+          <td style="padding: 2px 0; text-align: left;">
+            <a href="mailto:${email}" style="color: #000; text-decoration: none;">${email}</a>
+          </td>
+        </tr>` : '';
+
+    currentSignatureHTML = `
+<table width="660" cellpadding="0" cellspacing="0" style="font-family: Calibri, sans-serif; font-size: 12px; color: #000; width: 660px; border-collapse: collapse;">
+  <tr>
+    <td width="316" valign="top" style="padding-top: 15px; padding-right: 20px; border-right: 1px solid #12227e;">
+      <a href="https://pans.glogow.pl" target="_blank" style="text-decoration: none;">
+        <img src="https://pans.glogow.pl/wp-content/uploads/2026/07/logoPANS.png" alt="Logo uczelni" style="max-width: 280px; height: auto; display: block; margin-bottom: 10px;">
+      </a>
+    </td>
+
+    <td width="303" valign="top" style="padding-left: 30px; line-height: 1.3;">
+      <p><strong style="font-size: 16px;">${titleName}</strong><br>
+      <span style="display: block; color: #6e6e6e; padding-top: 3px;">${nameEn}</span>
+      <strong style="display: block; color: #12227e; padding-top: 3px;">${positionPl}</strong>
+      <span style="display: block; color: #6e6e6e; padding-top: 3px;">${positionEn}</span><br>
+      </p>
+    </td>
+  </tr>
+
+  <tr>
+    <td width="316" valign="top" style="padding-right: 20px; border-right: 1px solid #12227e; color: #6e6e6e; font-size: 12px; line-height: 1.4;">
+      <p style="margin: 0;">
+        <strong><span style="display: block; color: #12227e; padding-top: 3px;">Państwowa Akademia Nauk Stosowanych w Głogowie</span></strong>
+        <span style="display: block; color: #6e6e6e;">State University of Applied Sciences in Głogów</span>
+        <span style="display: block; color: #000; padding-top: 3px;">ul. Piotra Skargi 5, 67-200 Głogów | NIP 6932045180</span>
+      </p>
+    </td>
+
+    <td width="303" valign="top" style="padding-left: 30px;">
+      <table cellpadding="0" cellspacing="0" style="font-family: Calibri, sans-serif; font-size: 12px; color: #000;">${mobileRow}${landlineRow}${emailRow}
+      </table>
+    </td>
+  </tr>
+</table>`.trim();
+
+    document.getElementById("signatureOutput").innerHTML = currentSignatureHTML;
+}
+
+function copySignature() {
+    if (!currentSignatureHTML) { alert("Najpierw wygeneruj stopkę!"); return; }
+    const range = document.createRange();
+    range.selectNodeContents(document.getElementById("signatureOutput"));
+    window.getSelection().removeAllRanges();
+    window.getSelection().addRange(range);
+    document.execCommand("copy");
+    alert("Stopka skopiowana!");
+}
+
+function copySignatureAsHTML() {
+    if (!currentSignatureHTML) { alert("Najpierw wygeneruj stopkę!"); return; }
+    navigator.clipboard.writeText(currentSignatureHTML).then(() => {
+        alert("Kod HTML skopiowany do schowka!");
+    }).catch(() => {
+        alert("Nie udało się skopiować – spróbuj ręcznie zaznaczyć kod.");
+    });
+}
+</script>
+
+</div>
+
+</body>
+</html>
