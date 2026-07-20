@@ -107,7 +107,7 @@
         Instrukcja Outlook
     </button>
 </a>
-<a href="https://support.google.com/mail/answer/8395?hl=PL&ref_topic=3394219" target="_blank" style="text-decoration: none;">
+<a href="https://support.google.com/mail/answer/8395?hl=pl&ref_topic=3394219" target="_blank" style="text-decoration: none;">
     <button style="margin: 10px 10px 0 0; padding: 10px 20px; font-size: 16px; color: #ffffff; background-color: #22346c; border: none; border-radius: 5px; cursor: pointer;">
         Instrukcja Gmail
     </button>
@@ -157,55 +157,55 @@ function generateSignature() {
     const mobileRow = phoneMobile ? `
         <tr>
           <td style="padding: 2px 0; padding-right: 10px; text-align: left; vertical-align: top; white-space: nowrap; color: #6e6e6e;">m:</td>
-          <td style="padding: 2px 0; text-align: left;">${phoneMobile}</td>
+          <td style="padding: 2px 0; text-align: left; color: #000000;">${phoneMobile}</td>
         </tr>` : '';
 
     const landlineRow = phoneLandline ? `
         <tr>
           <td style="padding: 2px 0; padding-right: 10px; text-align: left; vertical-align: top; white-space: nowrap; color: #6e6e6e;">t:</td>
-          <td style="padding: 2px 0; text-align: left;">${phoneLandline}</td>
+          <td style="padding: 2px 0; text-align: left; color: #000000;">${phoneLandline}</td>
         </tr>` : '';
 
     const emailRow = email ? `
         <tr>
           <td style="padding: 2px 0; padding-right: 10px; text-align: left; vertical-align: top; white-space: nowrap; color: #6e6e6e;">e:</td>
           <td style="padding: 2px 0; text-align: left;">
-            <a href="mailto:${email}" style="color: #000; text-decoration: none;">${email}</a>
+            <a href="mailto:${email}" style="color: #000000; text-decoration: none;"><span style="color: #000000;">${email}</span></a>
           </td>
         </tr>` : '';
 
     currentSignatureHTML = `
-<table width="660" cellpadding="0" cellspacing="0" style="font-family: Calibri, sans-serif; font-size: 12px; color: #000; width: 660px; table-layout: fixed; border-collapse: collapse;">
+<table width="660" cellpadding="0" cellspacing="0" style="font-family: Calibri, sans-serif; font-size: 12px; color: #000000; width: 660px; table-layout: fixed; border-collapse: collapse;">
   <tr>
-    <td width="316" valign="top" style="padding-top: 15px; padding-right: 20px; padding-bottom: 26px; border-right: 1px solid #12227e;">
+    <td width="316" valign="top" style="padding-top: 15px; padding-right: 20px; padding-bottom: 36px; border-right: 1px solid #12227e;">
       <a href="https://pans.glogow.pl" target="_blank" style="text-decoration: none;">
-        <img src="https://pans.glogow.pl/wp-content/uploads/2026/07/logoPANS.png" alt="Logo uczelni" width="280" height="66" style="width: 280px; height: 66px; display: block;">
+        <img src="https://pans.glogow.pl/wp-content/uploads/2026/07/logoPANS.png" alt="Logo uczelni" width="280" height="66" style="width: 280px; height: 66px; display: block; border: 0;">
       </a>
     </td>
 
-    <td width="303" valign="top" style="padding-left: 30px; line-height: 1.3;">
-      <p style="margin: 0; font-size: 16px; font-weight: bold; color: #000;">${titleName}</p>
-      <p style="margin: 0; padding-top: 3px; color: #6e6e6e;">${nameEn}</p>
-      <p style="margin: 0; padding-top: 3px; font-weight: bold; color: #12227e;">${positionPl}</p>
-      <p style="margin: 0; padding-top: 3px; color: #6e6e6e;">${positionEn}</p>
+    <td width="303" valign="top" style="padding-top: 13px; padding-left: 30px; line-height: 1.3;">
+      <p style="margin: 0; mso-margin-top-alt: 0px; mso-margin-bottom-alt: 0px; font-size: 16px; font-weight: bold; color: #000000;">${titleName}</p>
+      <p style="margin: 0; mso-margin-top-alt: 0px; mso-margin-bottom-alt: 0px; padding-top: 3px; color: #6e6e6e;">${nameEn}</p>
+      <p style="margin: 0; mso-margin-top-alt: 0px; mso-margin-bottom-alt: 0px; padding-top: 3px; font-weight: bold; color: #12227e;">${positionPl}</p>
+      <p style="margin: 0; mso-margin-top-alt: 0px; mso-margin-bottom-alt: 0px; padding-top: 3px; color: #6e6e6e;">${positionEn}</p>
     </td>
   </tr>
 
   <tr>
     <td width="316" valign="top" style="padding-right: 20px; border-right: 1px solid #12227e; color: #6e6e6e; font-size: 12px; line-height: 1.4;">
-      <p style="margin: 0; font-weight: bold; color: #12227e; padding-top: 3px;">Państwowa Akademia Nauk Stosowanych w Głogowie</p>
-      <p style="margin: 0; color: #6e6e6e;">State University of Applied Sciences in Głogów</p>
-      <p style="margin: 0; color: #000; padding-top: 3px;">ul. Piotra Skargi 5, 67-200 Głogów | NIP 6932045180</p>
+      <p style="margin: 0; mso-margin-top-alt: 0px; mso-margin-bottom-alt: 0px; font-weight: bold; color: #12227e; padding-top: 3px;">Państwowa Akademia Nauk Stosowanych w Głogowie</p>
+      <p style="margin: 0; mso-margin-top-alt: 0px; mso-margin-bottom-alt: 0px; color: #6e6e6e;">State University of Applied Sciences in Głogów</p>
+      <p style="margin: 0; mso-margin-top-alt: 0px; mso-margin-bottom-alt: 0px; color: #000000; padding-top: 3px;">ul. Piotra Skargi 5, 67-200 Głogów | NIP 6932045180</p>
     </td>
 
     <td width="303" valign="top" style="padding-left: 30px;">
-      <table cellpadding="0" cellspacing="0" style="font-family: Calibri, sans-serif; font-size: 12px; color: #000;">${mobileRow}${landlineRow}${emailRow}
+      <table cellpadding="0" cellspacing="0" style="font-family: Calibri, sans-serif; font-size: 12px; color: #000000;">${mobileRow}${landlineRow}${emailRow}
       </table>
     </td>
   </tr>
   <tr>
     <td colspan="2" style="padding-top: 12px;">
-      <p style="margin: 0; text-align: center; font-style: italic; font-size: 13px; color: #12227e; line-height: 1.4;">
+      <p style="margin: 0; mso-margin-top-alt: 0px; mso-margin-bottom-alt: 0px; text-align: center; font-style: italic; font-size: 13px; color: #12227e; line-height: 1.4;">
         „Wierzymy, że skuteczna edukacja to taka, która uczy jak żyć”
       </p>
     </td>
