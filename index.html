@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Generator Stopki</title>
+    <title>Generator Stopki PANS</title>
     <style>
         body { margin: 0; font-family: Arial, sans-serif; background: #f8f9fa; }
         #loginScreen {
@@ -154,6 +154,10 @@ function generateSignature() {
     const phoneLandline = document.getElementById("phoneLandline").value.trim();
     const email = document.getElementById("email").value.trim();
 
+    const nameEnRow = nameEn ? `<p style="margin: 0; mso-margin-top-alt: 0px; mso-margin-bottom-alt: 0px; padding-top: 3px; color: #6e6e6e;">${nameEn}</p>` : '';
+    const positionPlRow = positionPl ? `<p style="margin: 0; mso-margin-top-alt: 0px; mso-margin-bottom-alt: 0px; padding-top: 3px; font-weight: bold; color: #12227e;">${positionPl}</p>` : '';
+    const positionEnRow = positionEn ? `<p style="margin: 0; mso-margin-top-alt: 0px; mso-margin-bottom-alt: 0px; padding-top: 3px; color: #6e6e6e;">${positionEn}</p>` : '';
+
     const mobileRow = phoneMobile ? `
         <tr>
           <td style="padding: 2px 0; padding-right: 10px; text-align: left; vertical-align: top; white-space: nowrap; color: #6e6e6e;">m:</td>
@@ -185,9 +189,9 @@ function generateSignature() {
 
     <td width="303" valign="top" style="padding-top: 13px; padding-left: 30px; line-height: 1.3;">
       <p style="margin: 0; mso-margin-top-alt: 0px; mso-margin-bottom-alt: 0px; font-size: 16px; font-weight: bold; color: #000000;">${titleName}</p>
-      <p style="margin: 0; mso-margin-top-alt: 0px; mso-margin-bottom-alt: 0px; padding-top: 3px; color: #6e6e6e;">${nameEn}</p>
-      <p style="margin: 0; mso-margin-top-alt: 0px; mso-margin-bottom-alt: 0px; padding-top: 3px; font-weight: bold; color: #12227e;">${positionPl}</p>
-      <p style="margin: 0; mso-margin-top-alt: 0px; mso-margin-bottom-alt: 0px; padding-top: 3px; color: #6e6e6e;">${positionEn}</p>
+      ${nameEnRow}
+      ${positionPlRow}
+      ${positionEnRow}
     </td>
   </tr>
 
